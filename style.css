@@ -1,4 +1,21 @@
 img{
     height: 250px;
     width: 70px;
+   
+}
+
+.modal-contenedor{
+    display: flex;
+    align-items: flex-start;
+   
+}
+
+.img-carrito{
+    width: 200px;
+    padding: 20px
+}
+
+.parrafo{
+    font-size: 25px;
+    font-weight: 700;
 }
