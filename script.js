@@ -1,6 +1,6 @@
 const TodosLosProductos = [
   {
-    nombre: "Samsung Galaxy A53",
+    nombre: "S Galaxy A53",
     precio: 245000,
     caract: "4G",
     img: "https://tienda.movistar.com.ar/media/catalog/product/s/5/s53-negro-frente_1_1.png",
@@ -8,7 +8,7 @@ const TodosLosProductos = [
     cantidad: 1,
   },
   {
-    nombre: "Samsung Galaxy A03",
+    nombre: "S Galaxy A03",
     precio: 300000,
     caract: "5G",
     img: "https://tienda.personal.com.ar/images/Samsung_Galaxy_A03_Azul_Frente_min_9ae47d8c3c.png",
@@ -16,7 +16,7 @@ const TodosLosProductos = [
     cantidad: 1,
   },
   {
-    nombre: "amsung Galaxy A22 ",
+    nombre: "S Galaxy A22 ",
     precio: 530000,
     caract: "4G",
     img: "https://tienda.movistar.com.ar/media/catalog/product/a/2/a22-gris-frente.png",
@@ -24,7 +24,7 @@ const TodosLosProductos = [
     cantidad: 1,
   },
   {
-    nombre: "Samsung galaxy A03 Core",
+    nombre: "S Galaxy A03 Core",
     precio: 950000,
     caract: "5G",
     img: "https://tienda.movistar.com.ar/media/catalog/product/a/0/a03-negro-frente_2.png",
@@ -32,7 +32,7 @@ const TodosLosProductos = [
     cantidad: 1,
   },
   {
-    nombre: "amsung Galaxy A13",
+    nombre: "S Galaxy A13",
     precio: 245000,
     caract: "5G",
     img: "https://tienda.movistar.com.ar/media/catalog/product/a/1/a13-negro-frente.png",
@@ -40,7 +40,7 @@ const TodosLosProductos = [
     cantidad: 1,
   },
   {
-    nombre: "amsung Galaxy A23",
+    nombre: "S Galaxy A23",
     precio: 700000,
     caract: "4G",
     img: "https://tienda.movistar.com.ar/media/catalog/product/a/2/a23-negro-frente.png",
@@ -48,7 +48,7 @@ const TodosLosProductos = [
     cantidad: 1,
   },
   {
-    nombre: "amsung Galaxy A04S",
+    nombre: "S Galaxy A04S",
     precio: 320000,
     caract: "5G",
     img: "https://tienda.movistar.com.ar/media/catalog/product/cache/29ccbb5c02aec1862b4f5a57a55d0f2f/f/r/frente_14.png",
@@ -56,7 +56,7 @@ const TodosLosProductos = [
     cantidad: 1,
   },
   {
-    nombre: "amsung Galaxy A33 ",
+    nombre: "S Galaxy A33 ",
     precio: 530000,
     caract: "4G",
     img: "https://tienda.movistar.com.ar/media/catalog/product/cache/29ccbb5c02aec1862b4f5a57a55d0f2f/a/3/a33-negro-frente.png",
@@ -64,7 +64,7 @@ const TodosLosProductos = [
     cantidad: 1,
   },
   {
-    nombre: "amsung Galaxy A30",
+    nombre: "S Galaxy A30",
     precio: 900000,
     caract: "5G",
     img: "https://catalogo.movistar.com.pe/ArchivosUsuario/EquipoCaracteristica/galaxy-a30_1187_Imagen.png",
@@ -72,7 +72,7 @@ const TodosLosProductos = [
     cantidad: 1,
   },
   {
-    nombre: "amsung Galaxy A32",
+    nombre: "S Galaxy A32",
     precio: 740000,
     caract: "4G",
     img: "https://catalogo.movistar.com.pe/ArchivosUsuario/EquipoCaracteristica/samsung-galaxy-a32_2261348_Imagen.png",
@@ -80,7 +80,7 @@ const TodosLosProductos = [
     cantidad: 1,
   },
   {
-    nombre: "amsung Galaxy A21s",
+    nombre: "S Galaxy A21s",
     precio: 335000,
     caract: "5G",
     img: "https://catalogo.movistar.com.pe/ArchivosUsuario/ImagenEquipo/galaxy-a21s_40064293_Big_Imagen.png",
@@ -88,7 +88,7 @@ const TodosLosProductos = [
     id: 11,
   },
   {
-    nombre: "amsung Galaxy A51",
+    nombre: "S Galaxy A51",
     precio: 790000,
     caract: "4G",
     img: "https://catalogo.movistar.com.pe/ArchivosUsuario/EquipoCaracteristica/galaxy-a51_1327_Imagen.png",
@@ -102,6 +102,11 @@ const carritoContenedor = document.querySelector("#carritoContenedor");
 const vaciarCarrito = document.querySelector("#vaciarCarrito");
 const precioTotal = document.querySelector("#precioTotal");
 const procesarCompra = document.querySelector("#comprar");
+const containerNoti = document.querySelector('#containerNoti')
+const btnAceptar = document.querySelector('#btnAceptar')
+
+
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -125,7 +130,22 @@ TodosLosProductos.forEach((producto) => {
 });
 
 procesarCompra.addEventListener('click', ()=>{
-  alert("culo")
+  if(carrito.length === 0){
+
+contenedor.className = "d-none"
+containerNoti.innerHTML = `<h1 class="text-center mt-3">Tu carrito está vacío!!</h1>`
+carrito.length = [];
+mostrarCarrito();
+  }else{
+
+  contenedor.className = "d-none"
+  containerNoti.innerHTML = `<h1 class="text-center mt-3">Compra realizada!!</h1>`
+  carrito.length = [];
+  mostrarCarrito();
+  }
+
+
+
 })
 vaciarCarrito.addEventListener("click", () => {
   carrito.length = [];
