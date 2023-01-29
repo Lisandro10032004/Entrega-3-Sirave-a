@@ -96,16 +96,18 @@ const TodosLosProductos = [
     cantidad: 1,
   },
 ];
+// -----------------------------CONSTANTTES------------------------------------------------
+
 let carrito = [];
 const contenedor = document.getElementById("contenedor");
 const carritoContenedor = document.querySelector("#carritoContenedor");
 const vaciarCarrito = document.querySelector("#vaciarCarrito");
 const precioTotal = document.querySelector("#precioTotal");
 const procesarCompra = document.querySelector("#comprar");
-const containerNoti = document.querySelector('#containerNoti')
-const btnAceptar = document.querySelector('#btnAceptar')
+const containerNoti = document.querySelector("#containerNoti");
+const btnAceptar = document.querySelector("#btnAceptar");
 
-
+// -------------------------------------------------------------------------------------------
 
 
 
@@ -115,13 +117,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 TodosLosProductos.forEach((producto) => {
-  const { id, nombre, cantidad, precio, img, caract } = producto;
+  const { id, nombre, precio, img, caract } = producto;
   contenedor.innerHTML += `<div class="card" style="width: 18rem;">
   <img src="${img}" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">${nombre}</h5>
     <p class="card-text">Características: ${caract}</p>
-    <p class="card-text">Cantidad: ${cantidad}</p>
     <p class="card-text">Precio: $${precio}</p>
     
 <button onclick="agregarProducto(${id})" class="btn btn-primary">Agregar al carrito</button>
@@ -129,24 +130,53 @@ TodosLosProductos.forEach((producto) => {
 </div>`;
 });
 
-procesarCompra.addEventListener('click', ()=>{
-  if(carrito.length === 0){
-
-contenedor.className = "d-none"
-containerNoti.innerHTML = `<h1 class="text-center mt-3">Tu carrito está vacío!!</h1>`
-carrito.length = [];
-mostrarCarrito();
-  }else{
-
-  contenedor.className = "d-none"
-  containerNoti.innerHTML = `<h1 class="text-center mt-3">Compra realizada!!</h1>`
-  carrito.length = [];
-  mostrarCarrito();
+procesarCompra.addEventListener("click", () => {
+  if (carrito.length === 0) {
+    Swal.fire({
+      title: "Error",
+      icon: "error",
+      text: "No tienes nada en tu carrito!",
+    });
+    carrito.length = [];
+    mostrarCarrito();
+  } else {
+    
+    let timerInterval
+Swal.fire({
+  title: 'Procesando compra',
+ 
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading()
+    const b = Swal.getHtmlContainer().querySelector('b')
+    timerInterval = setInterval(() => {
+      b.textContent = Swal.getTimerLeft()
+    }, 100)
+  },
+  willClose: () => {
+    clearInterval(timerInterval)
   }
+}).then((result) => {
 
-
-
+  if (result.dismiss === Swal.DismissReason.timer) {
+    console.log('I was closed by the timer')
+  }
 })
+
+ setTimeout(() => {
+  Swal.fire({
+    title: "Enhorabuena",
+    icon: "success",
+    text: "Compra realizada con éxito", 
+      
+  });
+ }, 1000);
+    carrito.length = [];
+    mostrarCarrito();
+    
+  }
+});
 vaciarCarrito.addEventListener("click", () => {
   carrito.length = [];
   mostrarCarrito();
@@ -216,4 +246,3 @@ const eliminarProducto = (id) => {
 const guardarStorage = () => {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 };
-
